@@ -1,0 +1,13 @@
+@media (max-width: 400px) {
+    .cont{
+        background-color: blue !important;
+        width: 320px !important;
+        /* margin-top: -25px !important; */
+    }
+    .d{
+        display: block !important;
+    }
+    .dis{
+        color: white !important;
+    }
+}

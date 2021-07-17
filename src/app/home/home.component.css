@@ -1,0 +1,100 @@
+body {
+  background-image: url(../../assets/img/Page-Turner.png);
+  /* background-color: red; */
+  background-size: cover;
+  height: 100vh;
+  background-repeat: no-repeat;
+  font-family: cursive;
+  background-attachment: fixed;
+}
+.carousel_img {
+  width: 95% !important;
+}
+.about1 {
+  box-shadow: black 0px 7px 13px 0px;
+  /* z-index: 10; */
+  background-image: url(../../assets/img/caro1.png);
+  transform: rotate(-35deg);
+  width: 270px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+.about2 {
+  /* border: 5px solid black; */
+  position: absolute;
+  left: 26%;
+  margin-top: 170px;
+  z-index: 1;
+  /* top: -10%; */
+  box-shadow: black 0px 7px 13px 0px;
+}
+.about4 {
+  box-shadow: black 0px 7px 13px 0px;
+  width: 250px;
+  margin-left: -30px;
+}
+.prsTxt {
+  color: white;
+  font-size: 3em;
+}
+.add {
+  margin-left: 20px;
+  width: 140px;
+  cursor: pointer;
+}
+
+.row_details {
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+footer {
+  background-color: blue;
+  border-top-right-radius: 100px;
+  margin-top: 100px;
+  /* padding: 100px; */
+}
+@media (max-width: 760px) {
+  .home_details_img {
+    margin-top: 20px !important;
+  }
+  .cont{
+    height: 90vh !important;
+  }
+  .features .card {
+    width: 15rem !important;
+    margin: 0px !important;
+    display: flex !important;
+  }
+  .caro {
+    width: 100% !important;
+    margin-left: 5px !important;
+  }
+  .prsTxt {
+    color: white;
+    font-size: 2em;
+  }
+}
+@media (max-width: 380px) {
+  .welcome_text {
+    line-height: normal !important;
+  }
+  .about4{
+    display: none !important;
+  }
+  .add {
+    margin-left: 40px;
+    width: 140px;
+    cursor: pointer;
+    margin-top: 10px !important;
+    cursor: pointer;
+  }
+  .add1{
+    margin-left: 40px !important;
+  }.caro{
+    width: 600px !important;
+    margin-left: 40px !important;
+  }
+  footer{
+    padding: 20px !important;
+  }
+}

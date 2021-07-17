@@ -1,0 +1,45 @@
+body {
+  background: conic-gradient(
+    #3137df 0%,
+    #0d0aba 25%,
+    #fff 25%,
+    #fff 50%,
+    #270bdc 50%,
+    #2141cf 75%,
+    #fff 75%,
+    #fff 100%
+  );
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  font-family: cursive;
+}
+.reg_cont {
+  box-shadow: 2px 2px 2px 2px gainsboro !important;
+}
+input {
+  border-radius: 0;
+  border: 2px;
+  outline: none;
+}
+input:active {
+  outline-color: none !important;
+}
+label {
+  color: black;
+}
+@media (max-width:380px) {
+  body{
+    overflow: scroll !important;
+  }
+  .reg_display{
+    display: block !important;
+  }
+  .reg_cont{
+    height: 800px !important;
+  }
+  .reg-display-m{
+    margin: 0 !important;
+    margin-top: 20px !important;
+  }
+}

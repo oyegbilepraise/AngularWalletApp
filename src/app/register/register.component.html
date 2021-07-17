@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <app-nav></app-nav>
+    </div>
+    <div class="container my-5 bg-light shadow p-5 reg_cont animate__animated animate__fadeInUp" style="height: 75vh">
+      <div class="row">
+        <div class="col-6 animate__animated animate__zoomInRight animate__slower d-none d-md-block">
+          <img class="w-100" src="/assets/img/loanr.png" alt="" style="margin-top: -90px;"/>
+          <div class="mx-5 d-flex" style="margin-top: -30px;">
+            <button>Sign up with Google</button> <br />
+              <button class="mx-5">Sign up with Facebook</button><br />
+          </div>  
+        </div>
+        <div class="col-12 col-md-6 animate__animated animate__zoomInRight animate__slower">
+          <div class="progress"  style="height: 30px;">
+            <div class="progress-bar progress-bar-striped fs-3" role="progressbar" style="width: 100%;">SIGNUP</div>
+          </div>
+          <form (submit)="submitForm()" [formGroup]="userForm" style="margin-left: 30px;" class="mt-3">
+            <div class="d-flex reg_display">
+              <div>
+                <label><i class="fa fa-user" aria-hidden="true"> </i>
+                  <span class="mx-3">Firstname:</span>
+                </label>
+                <input formControlName="fName" type="text" name="firstname"
+                  class="form-control mt-3 border-0 border-bottom"
+                  style="background-color: inherit; border-color: black !important;
+                  outline: none !important;" placeholder="enter ya lastname"/>
+                  <div *ngIf='f.fName.touched && f.fName.invalid'>
+                    <small class="text-danger" *ngIf="f.fName.errors?.required">This field is required. </small><br />
+                  </div>
+              </div>  
+              <div class="mx-5 reg-display-m">
+                <label><i class="fa fa-user" aria-hidden="true"> </i>
+                  <span class="mx-3">Lastname:</span>
+                </label>
+                <input formControlName="lName" type="text" name="lastname"
+                  class="form-control mt-3 border-0 border-bottom"
+                  style="background-color: inherit; border-color: black !important;
+                  outline: none !important;" placeholder="enter ya firstname"/>
+                  <div *ngIf='f.lName.touched && f.lName.invalid'>
+                    <small class="text-danger" *ngIf="f.lName.errors?.required">This field is required. </small><br />
+                  </div>
+              </div>
+            </div>
+            <div class="d-flex mt-3 reg_display">
+              <div>
+                <label><i class="fa fa-envelope" aria-hidden="true"></i>
+                  <span class="mx-3">Email:</span>
+                </label>
+                <input formControlName="email" type="email" name="email"
+                  class="form-control mt-3 border-0 border-bottom"
+                  style="background-color: inherit; border-color: black !important;outline: none !important;" placeholder="example@gmail.com"/>
+                  <div *ngIf='f.email.touched && f.email.invalid'>
+                    <small class="text-danger" *ngIf="f.email.errors?.required">This field is required. </small>
+                    <small class="text-danger" *ngIf="f.email.errors?.email">Please enter a valid email. </small>
+                    <br />
+                  </div>
+              </div>
+              <div class="mx-5 reg-display-m">
+                <label><i class="fa fa-phone-alt" aria-hidden="true"></i>
+                  <span class="mx-3">Phone No:</span>
+                </label>
+                <input formControlName="phone" type="text"name="phone"
+                  class="form-control mt-3 border-0 border-bottom"
+                  style="background-color: inherit; border-color: black !important;outline: none !important;" placeholder="phone no"/>
+                  <div *ngIf='f.phone.touched && f.phone.invalid'>
+                    <small class="text-danger" *ngIf="f.phone.errors?.required">This field is required. </small>
+                    <br />
+                  </div>
+              </div>
+            </div>
+            <div class="d-flex mt-3 reg_display">
+              <div>
+                <label><i class="fa fa-calendar" aria-hidden="true"></i> D.O.B</label><br>
+                <input type="date" class="mt-5" formControlName='date' name="mydate">
+              </div>
+              <div class="mx-5 reg-display-m">                
+                <label><i class="fa fa-key" aria-hidden="true"></i>
+                  <span class="mx-3">Password:</span>
+                </label>
+                <input formControlName="password" type="password" name="password" class="form-control mt-3 border-0 border-bottom" style="background-color: inherit; border-color: black !important; outline: none !important;" placeholder="password"/>
+                <div *ngIf='f.password.touched && f.password.invalid'>
+                  <small class="text-danger" *ngIf="f.password.errors?.required">This field is required. </small>
+                  <small class="text-danger" *ngIf="f.password.errors?.minlength">Minimum of 8 characters </small>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <button [disabled]="userForm.invalid" class="btn btn-primary form-control text-dark mt-3" type="submit">
+              Submit
+            </button>
+            <span class="my-5 mx-3 mt-5">
+              Already have an account?
+              <button class="p-1 bg-primary mx-2 mt-3 rounded"
+                routerLink="/login"
+                >Login <i class="fa fa-arrow-right" aria-hidden="true"></i
+              ></button>
+            </span>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- client id = 325668962248-m499p0rhc7jg41saibaeflqq6idjr054.apps.googleusercontent.com
+
+client secret = MwkPCeuQCyFo8SpVep60fNfh -->

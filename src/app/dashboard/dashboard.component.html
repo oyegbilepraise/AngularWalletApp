@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    
+  <div class="body" style="background-color: aqua; overflow: hidden">
+    <div class="bg-white mx-4 rounded mt-4 shadow bg_height">
+      <div class="text-primary d-block d-md-none mx-2 mt-2 list" (click)='showPhoneDash()'>
+        <i class="fa fa-list" aria-hidden="true"></i>
+      </div>
+      <div class="row p-3 animate__animated animate__fadeInUp">
+        <!----------------------------------- Navbar ------------------------>
+        <div
+          class="col-2 animate__animated animate__slideInLeft animate__slow
+            navbar">
+          <div class="w-100 bg-light p-2 shadow">
+            <small>Hey, {{ user.firstname }}</small>
+            <p>Welcome Back!</p>
+          </div>
+          <div style="cursor: pointer; color: blue;" class="phone_nav">
+            <div class="hvr-bounce-to-right w-100 p-2 shadow mt-2" (click)='goToD("dashboard", "userId", "profile")' style="padding-left: 20px !important">
+              <i class="fa fa-home" aria-hidden="true"></i> <br />
+              Dashboard
+            </div>
+            <div data-bs-toggle="modal" data-bs-target="#depositModal"
+              class="hvr-bounce-to-right w-100 p-2 shadow mt-2"
+              style="padding-left: 20px !important"
+            >
+              <i class="fa fa-balance-scale"></i><br />Deposit
+            </div>
+            <div (click)='goToProfile("dashboard", "user.id", "profile")' data-bs-toggle="modal" data-bs-target="#transferModal"
+              class="hvr-bounce-to-right w-100 p-2 shadow mt-2"
+              style="padding-left: 20px !important"
+            >
+              <i class="fa fa-money" aria-hidden="true"></i><br />Transfer..
+            </div>
+            <div class="hvr-bounce-to-right w-100 p-2 shadow mt-2"
+              style="padding-left: 20px !important"
+              data-bs-toggle="modal" data-bs-target="#myloanModal"
+            >
+              <i class="fa fa-credit-card-alt"></i><br />
+              Loan|Requests
+            </div>
+            <div (click)='goToP("dashboard", "userId", "profile")'
+              class="hvr-bounce-to-right w-100 p-2 shadow mt-2"
+              style="padding-left: 20px !important"
+            >
+              <i class="fas fa-node-js"></i> <br />Profile
+            </div>
+            <div
+              data-bs-toggle="modal"
+              data-bs-target="#transferDetailsModal"
+              class="hvr-bounce-to-right w-100 p-2 shadow mt-2"
+              style="padding-left: 20px !important"
+            >
+              <i class="fa fa-history" aria-hidden="true"></i
+              ><br />Notifications ({{ user_history.length }})
+            </div>
+          </div>
+        </div>
+
+        <!---------------------------------- Navbar ------------------------->
+        
+          <div class="col-9" *ngIf='!show'>
+            <router-outlet>
+              <app-profile></app-profile>
+            </router-outlet>
+          </div>
+        
+        <!----------------------------Dash Overview ------------------------->
+        <div *ngIf='show'
+          class=" col-12 col-md-9
+            animate__animated animate__fadeIn animate__slower
+          "
+        >
+        
+          <div class="d-flex phone-dash">
+            <div class="d-flex"> 
+              <div class="text-center">
+              <span class="pt-3 text-center text-white h4 my-3 d-block d-md-none">
+                My Account
+              </span>
+              </div>
+              <button class="my-3 d-block d-md-none btn logout" (click)="logout()">
+                <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+              </button>
+            </div>
+            <div class="row mx-3 d-flex">
+              <div class="col-sm-12 col-md-4">
+                <div class="current_balance rounded shadow pp d-flex">
+                  <div class="mobile_data d-block d-md-none">
+                    <img
+                      src="/assets/img/avatar.png"
+                      class="rounded-circle" style="width: 40px" alt=""
+                    />
+                    <p>Welcome {{ user.firstname }}</p>
+                    <p>id: {{ user.id }}</p>
+                    <p>Email: {{ user.mail }}</p>
+                  </div>
+                  <div>
+                    <p class="p-1 mx-1">
+                      <span style="font-size: 9px">Available Balance </span
+                      ><br />
+                      <span>{{
+                        user_balance | currency: "NGN":"symbol-narrow"
+                      }}</span>
+                    </p>
+                    <p class="ppp d-block d-md-none" style="font-size: small">
+                      {{ usd | currency: "CAD":"symbol-narrow" }}
+                    </p>
+                    <p
+                      class="text-end d-block d-md-none acctNo"
+                      style="margin-left: 0; font-size: 25px; text-align: left"
+                    >
+                      {{ user.acctNo.toString().slice(0, 3) }}*** ***{{
+                        user.acctNo.toString().slice(6, 10)
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-8">
+                <div class="card w-75 shadow d-block d-md-none mobile_wallet">
+                  <small><i class="fas fa-wallet"></i> myWallets</small>
+                  <div class="d-flex mt-2 wallet">
+                    <div class="row">
+                      <div class="col-6 d-flex">
+                        <div
+                          *ngFor="let wallet of user_wallet; let i = index"
+                          class="mx-2"
+                        >
+                          <div class="card shadow" style="width: 160px">
+                            <div class="d-flex">
+                              <div
+                                style="width: 50px; height: 50px"
+                                class="rounded mt-3 mx-2"
+                              >
+                                <img
+                                  src="/assets/img/gold.png"
+                                  class=""
+                                  style="width: 70px; height: 60px"
+                                  alt=""
+                                />
+                              </div>
+                              <div class="mt-3">
+                                {{
+                                  wallet.walletBalance
+                                    | currency: "NGN":"symbol-narrow"
+                                }}
+                                <br />
+                                <small style="font-size: x-small">
+                                  {{ wallet.walletName }}
+                                </small>
+                                <span
+                                  (click)="delWallet(wallet, i)"
+                                  class="bg-danger p-1 rounded-circle"
+                                  style="
+                                    position: absolute;
+                                    top: -1%;
+                                    left: 88%;
+                                    width: 20px;
+                                    height: 20px;
+                                  "
+                                >
+                                  <i
+                                    class="fa fa-times text-white"
+                                    style="position: absolute; top: 2px"
+                                    aria-hidden="true"
+                                  ></i>
+                                </span>
+                              </div>
+                            </div>
+                            <div>
+                              <span style="font-size: small" class="mx-2 mt-1">
+                                {{ wallet.myAcctNo.toString().slice(0, 3) }}***
+                                ***{{ wallet.myAcctNo.toString().slice(6, 10)
+                                }}<i class="fas fa-copy mx-2"></i><br />
+                              </span>
+                              <small
+                                class="text-left text-primary"
+                                style="margin-left: 80px; font-size: xx-small"
+                              >
+                                {{ wallet.timeCreated | timeago }}
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="btn-primary p-3 w-25 text-center mt-2"
+                    style="
+                      width: 50px;
+                      cursor: pointer;
+                      height: 10px;
+                      margin-left: 140px;
+                    "
+                    data-bs-toggle="modal"
+                    data-bs-target="#walletModal"
+                  >
+                    <i
+                      class="fa fa-plus"
+                      style="position: absolute; margin-top: -10px"
+                      aria-hidden="true"
+                    >
+                    </i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-block d-md-none mt-5">
+              <p class="pt-3 text-center text-white h4 mt-5 d-block d-md-none">
+                Lorem Ipsum
+              </p>
+              <div class="row mt-3 mx-5 card-row" style="cursor: pointer">
+                <div
+                  class="col-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#transferModal"
+                >
+                  <div class="card shadow card_d hvr-bounce-to-right">
+                    <div class="text-center">
+                      <i
+                        class="fa fa-asterisk text-center"
+                        aria-hidden="true"
+                      ></i>
+                      <p>Transfer</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#mobileRequestModal"
+                >
+                  <div class="card shadow card_d hvr-bounce-to-right">
+                    <div class="text-center">
+                      <i
+                        class="fa fa-asterisk text-center"
+                        aria-hidden="true"
+                      ></i>
+                      <p>Requests</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myloanModal"
+                >
+                  <div class="card shadow card_d hvr-bounce-to-right">
+                    <div class="text-center">
+                      <i
+                        class="fa fa-asterisk text-center"
+                        aria-hidden="true"
+                      ></i>
+                      <p>Check Request</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-5 mx-4 card-row" style="cursor: pointer">
+                <div
+                  class="col-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#depositModal"
+                >
+                  <div class="card card_d shadow hvr-bounce-to-right">
+                    <div class="text-center">
+                      <i
+                        class="fa fa-asterisk text-center"
+                        aria-hidden="true"
+                      ></i>
+                      <p>Deposit</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#LtransModal"
+                >
+                  <div class="card card_d shadow hvr-bounce-to-right">
+                    <div class="text-center">
+                      <i
+                        class="fa fa-asterisk text-center"
+                        aria-hidden="true"
+                      ></i>
+                      <p>Transaction Details</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#transferDetailsModal"
+                >
+                  <div class="card shadow card_d hvr-bounce-to-right">
+                    <div class="text-center">
+                      <i
+                        class="fa fa-asterisk text-center"
+                        aria-hidden="true"
+                      ></i>
+                      <p>Notifications</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mx-2 shadow p-2 d-flex d-none d-md-block">
+              <nav aria-label="breadcrumb" class="d-flex">
+                <div>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                    <li
+                      class="breadcrumb-item active text-dark"
+                      aria-current="page"
+                    >
+                      Overview
+                    </li>
+                  </ol>
+                </div>
+                <div class="overview_fa" style="margin-left: 350px">
+                  <i class="fa fa-envelope mx-2" aria-hidden="true"></i>
+                  <i class="fa fa-bell mx-2" aria-hidden="true"></i>
+                  <i class="fa fa-calculator mx-2" aria-hidden="true"></i>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <div>
+
+            <div class="row mt-3 bg-light">
+              <!-------------------------- Quick Transfer ------------------->
+              <div
+                class="
+                  col-6
+                  bg-white
+                  shadow
+                  rounded
+                  mx-5
+                  quick
+                  d-none d-md-block
+                "
+                style="width: 320px"
+              >
+                <p>Quick Transfer</p>
+                <div class="d-flex w-100 transfer_scroll">
+                  <div
+                    *ngFor="let user of all_users; let i = index"
+                    class="w-25 mx-3"
+                  >
+                    <div
+                      class="card hvr-grow bg-light shadow"
+                      style="cursor: pointer"
+                      (click)="quickTransfer(user, i)"
+                    >
+                      <div
+                        class="rounded-circle border mx-2 mt-2 transfer_img"
+                        style="height: 50px; width: 50px"
+                      >
+                        <!-- <img src="/assets/img/avatar.png"  alt="" /> -->
+                      </div>
+                      <p class="text-center">
+                        {{ user.firstname }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2 quick_transfer">
+                  AcctNo:
+                  <input
+                    type="text"
+                    [(ngModel)]="transferAcct"
+                    class="border-0 border-bottom"
+                  /><br />
+                  Amount:
+                  <input
+                    type="text"
+                    [(ngModel)]="amount"
+                    class="border-0 border-bottom"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-primary mt-2 btn-sm form-control"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    data-bs-whatever="@mdo"
+                    [disabled]="!transferAcct || !amount"
+                  >
+                    Transfer
+                  </button>
+                </div>
+              </div>
+              <!-------------------------- Quick Transfer ------------------->
+
+              <!-------------------------- Loan Requests -------------------->
+              <div
+                class="
+                  col-6
+                  bg-white
+                  shadow
+                  rounded
+                  mx-5
+                  request
+                  d-none d-md-block
+                "
+                style="width: 400px"
+              >
+                <p>loan $ Requests</p>
+                <div class="loan">
+                  AcctNo:
+                  <input
+                    type="text"
+                    [(ngModel)]="loanAcct"
+                    class="border-0 border-bottom mt-2"
+                  />
+                  <br />
+                  Amount:<input
+                    type="text"
+                    [(ngModel)]="loanAmt"
+                    class="border-0 border-bottom mt-2"
+                  /><br />
+                  <div>
+                    Password:
+                    <input
+                      type="password"
+                      [(ngModel)]="transferPasssword"
+                      class="border-0 border-bottom mt-2"
+                    />
+                  </div>
+                  <button
+                    (click)="requestLoan()"
+                    class="btn btn-primary mt-3 form-control"
+                    [disabled]="!loanAcct || !loanAmt || !transferPasssword"
+                  >
+                    Request
+                  </button>
+                </div>
+              </div>
+              <!-------------------------- Loan Requests -------------------->
+            </div>
+          </div>
+          <div>
+            <div class="row mt-3 dnone" style="height: 170px" >
+              <!-------------------------- Wallet -------------------->
+              <div class="col-6 wallet-col d-none d-md-block">
+                <small><i class="fas fa-wallet"></i> myWallets</small>
+                <div class="d-flex mt-2 wallet">
+                  <div class="row">
+                    <div class="col-6 d-flex">
+                      <div
+                        *ngFor="let wallet of user_wallet; let i = index"
+                        class="mx-2"
+                      >
+                        <div class="card shadow" style="width: 160px">
+                          <div class="d-flex">
+                            <div
+                              style="width: 50px; height: 50px"
+                              class="rounded mt-3 mx-2"
+                            >
+                              <img
+                                src="/assets/img/gold.png"
+                                class=""
+                                style="width: 70px; height: 60px"
+                                alt=""
+                              />
+                            </div>
+                            <div class="mt-3">
+                              {{
+                                wallet.walletBalance
+                                  | currency: "NGN":"symbol-narrow"
+                              }}
+                              <br />
+                              <small style="font-size: x-small">
+                                {{ wallet.walletName }}
+                              </small>
+                              <span
+                                (click)="delWallet(wallet, i)"
+                                class="bg-danger p-1 rounded-circle"
+                                style="
+                                  position: absolute;
+                                  top: -1%;
+                                  left: 88%;
+                                  width: 20px;
+                                  height: 20px;
+                                "
+                              >
+                                <i
+                                  class="fa fa-times text-white"
+                                  style="position: absolute; top: 2px"
+                                  aria-hidden="true"
+                                ></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div>
+                            <span style="font-size: small" class="mx-2 mt-1">
+                              {{ wallet.myAcctNo.toString().slice(0, 3) }}***
+                              ***{{ wallet.myAcctNo.toString().slice(6, 10)
+                              }}<i class="fas fa-copy mx-2"></i><br />
+                            </span>
+                            <small
+                              class="text-left text-primary"
+                              style="margin-left: 80px; font-size: xx-small"
+                            >
+                              {{ wallet.timeCreated | timeago }}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="btn-primary p-3 w-25 text-center mt-2"
+                  style="
+                    width: 50px;
+                    cursor: pointer;
+                    height: 10px;
+                    margin-left: 140px;
+                  "
+                  data-bs-toggle="modal"
+                  data-bs-target="#walletModal"
+                >
+                  <i
+                    class="fa fa-plus"
+                    style="position: absolute; margin-top: -10px"
+                    aria-hidden="true"
+                  >
+                  </i>
+                </div>
+              </div>
+              <!-------------------------- Wallet -------------------->
+              <!-- Latest Trasactions -->
+              <div
+                class="
+                  col-6
+                  shadow
+                  bg-primary
+                  text-white
+                  p-2
+                  rounded
+                  mx-2
+                  L-trans
+                  d-none d-md-block
+                "
+                style="width: 400px;"
+              >
+                <i class="fa fa-history" aria-hidden="true"></i>Latest
+                Transactions ({{ LTrans.length }})
+                <span
+                  style="cursor: pointer; margin-left: 100px"
+                  class="border rounded"
+                  data-bs-toggle="modal"
+                  data-bs-target="#transferDetailsModal"
+                  >View all <i class="fa fa-arrow-right" aria-hidden="true"></i
+                ></span>
+                <div *ngFor="let trans of LTrans; let i = index" class="mt-2">
+                  <div class="row" *ngIf="i < 4">
+                    <div class="col-4">{{ i + 1 }} - {{ trans.type }}</div>
+                    <div class="col-4">
+                      <small>{{ trans.time | timeago }}</small>
+                    </div>
+                    <div
+                      class="col-4"
+                      [style]="
+                        trans.type === 'Debit'
+                          ? { color: 'red' }
+                          : { color: 'green' }
+                      "
+                    >
+                      <span class="bg-white p-1 rounded shadow text-center">
+                        <span *ngIf="trans.type === 'Debit'">-</span
+                        ><span *ngIf="trans.type === 'Credit'">+</span>
+                        {{ trans.amt | currency: "NGN":"symbol-narrow" }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Latest Trasactions -->
+            </div>
+          </div>
+        </div>
+        <!----------------------------Dash Overview ------------------------->
+
+        <!----------------------------Profile ------------------------------->
+        <div
+          class="
+            col-1
+            animate__animated animate__slideInRight animate__slow
+            d-none d-md-block
+          "
+          style="margin-left: -33px"
+        >
+          <div
+            id="red"
+            class="text-center text-white"
+            style="font-size: small"
+          ></div>
+          <div *ngFor="let user of user_profile" style="margin-top: 50px; cursor: pointer;" (click)='goToProfile("dashboard", user.id, "profile")'>
+            <div class="">
+              <img
+                src="/assets/img/avatar.png"
+                alt=""
+                class="w-100 rounded-circle mx-2"
+              />
+            </div>
+            <div
+              class="text-center mt-2"
+              style="width: 130px; margin-left: -13px"
+            >
+            <p class="bg-white shadow p-1 mt-3" style="color: blue">
+              AcctNo: {{ user.acctNo }}
+            </p>
+            <p class="bg-white shadow p-1" style="color: blue">
+              USD: <br>{{ usd | currency: "CAD":"symbol-narrow" }}
+            </p>
+            <div>
+              <img src="/assets/img/caro1.png" class="w-100" style="margin-top: 60px;" alt="">
+            </div>
+              <button class="my-3 btn logout" (click)="logout()">
+                <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+              </button>
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+        <!----------------------------Profile ------------------------------->
+      </div>
+    </div>
+
+    <!----------------- transfer_Password Modal ----------------------------->
+    <div
+      class="modal"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <label for=""> Please enter your Transfer Pin </label>
+            </h5>
+            <br />
+            <div>
+              Password:
+              <input type="password" [(ngModel)]="transferPasssword" />
+            </div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-footer">
+            <button (click)="cashTransfer()" class="btn btn-primary">
+              Transfer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!----------------- transfer_Password Modal ----------------------------->
+
+    <!--------------------------Transfer Modal  ----------------------------->
+    <div
+      class="modal fade"
+      id="transferModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Transfer</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- <form> -->
+            <div class="mb-2">
+              <label for="recipient-name" class="col-form-label"
+                >Account Number:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                [(ngModel)]="transferAcct"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="message-text" class="col-form-label">Amount:</label>
+              <input type="text" [(ngModel)]="amount" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="message-text" class="col-form-label">Password:</label>
+              <input
+                type="password"
+                [(ngModel)]="transferPasssword"
+                class="form-control"
+              />
+            </div>
+            <!-- </form> -->
+          </div>
+          <div class="modal-footer">
+            <button (click)="cashTransfer()">Transfer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--------------------------Transfer Modal  ----------------------------->
+
+    <!-------------------------- Loan Modal  ------------------------------->
+    <div
+      class="modal fade"
+      id="myloanModal"
+      aria-hidden="true"
+      aria-labelledby="exampleModalToggleLabel"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">myRequests</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let request of user_request; let i = index">
+              <div *ngIf="request.type === 'myRequest'" class="mt-2">
+                <ul>
+                  <li>
+                    {{ request.details }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary"
+              data-bs-target="#exampleModalToggle2"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              Open received request
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModalToggle2"
+      aria-hidden="true"
+      aria-labelledby="exampleModalToggleLabel2"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel2">
+              Recieved requests
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- <div class="col-6"> -->
+            <div *ngFor="let request of user_request; let i = index">
+              <div
+                *ngIf="request.type === 'loanRequest'"
+                class="mt-2"
+                class="d-flex"
+              >
+                <ul>
+                  <li>
+                    {{ request.details }}
+                  </li>
+                </ul>
+                <button
+                  (click)="acceptLoan(i, request)"
+                  class="btn btn-success btn-sm mx-2"
+                >
+                  <i class="fas fa-check"></i>
+                </button>
+                <button class="btn btn-danger btn-sm">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary"
+              data-bs-target="#myloanModal"
+              data-bs-toggle="modal"
+              data-bs-dismiss="modal"
+            >
+              Back to myRequests
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------- Loan Modal  ------------------------------->
+    <!-------------------------- Wallet Modal ----------------------------->
+    <div
+      class="modal fade"
+      id="walletModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Create wallet</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-2">
+              <label for="recipient-name" class="col-form-label"
+                >Wallet Name:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                [(ngModel)]="walletName"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="message-text" class="col-form-label">Amount:</label>
+              <input type="text" [(ngModel)]="walletAmt" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="message-text" class="col-form-label">Password:</label>
+              <input
+                type="password"
+                [(ngModel)]="transferPasssword"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button (click)="createWalleet()">CreateWallet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------- Wallet Modal ------------------------------>
+
+    <!-------------------------- Transaction Details Modal ----------------->
+    <div
+      class="modal fade"
+      id="transferDetailsModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title text-center bg-primary text-white"
+              id="staticBackdropLabel"
+            >
+              <i class="fa fa-history" aria-hidden="true"></i> Transaction
+              History
+            </h5>
+            <div class="input-group">
+              <span class="input-group-addon">Search</span>
+              <input
+                id="msg"
+                type="text"
+                class="form-control"
+                name="msg"
+                placeholder="Additional Info"
+                [(ngModel)]="input"
+                (keyup)="searchUser()"
+              />
+            </div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let history of user_history; let i = index">
+              <p>
+                {{ i + 1 }} - {{ history.details }} @ {{ history.time }} <span *ngIf='history.to !== user.firstname'>to {{ history.to }} </span> 
+                 
+                <button (click)="deleteHistory(history, i)"><i class="fa fa-times" aria-hidden="true"></i></button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------- Transaction Details Modal ----------------->
+
+    <!-------------------------- Deposit Modal  ----------------------------->
+    <div
+      class="modal fade"
+      id="depositModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Deposit</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- <form> -->
+            <div class="mb-2">
+              <label for="message-text" class="col-form-label">Amount:</label>
+              <input
+                type="text"
+                [(ngModel)]="deposit"
+                placeholder="amount to be deposited"
+                class="form-control"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="message-text" class="col-form-label">Password:</label>
+              <input
+                type="password"
+                [(ngModel)]="transferPasssword"
+                class="form-control"
+              />
+            </div>
+            <!-- </form> -->
+          </div>
+          <div class="modal-footer">
+            <button
+              [disabled]="!deposit"
+              class="btn btn-primary btn-sm my-3 form-control"
+              (click)="cashDeposit()"
+            >
+              Deposit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------- Deposit Modal  ----------------------------->
+
+    <!--------------------------Requests Mobile Modal  ---------------------->
+    <div
+      class="modal fade"
+      id="mobileRequestModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Requests</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- <form> -->
+            <div class="mb-2">
+              <label for="recipient-name" class="col-form-label"
+                >Account Number:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                [(ngModel)]="loanAcct"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="message-text" class="col-form-label">Amount:</label>
+              <input type="text" [(ngModel)]="loanAmt" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="message-text" class="col-form-label">Password:</label>
+              <input
+                type="password"
+                [(ngModel)]="transferPasssword"
+                class="form-control"
+              />
+            </div>
+            <!-- </form> -->
+          </div>
+          <div class="modal-footer">
+            <button
+              (click)="requestLoan()"
+              class="btn btn-primary mt-3 form-control"
+              [disabled]="!loanAcct || !loanAmt || !transferPasssword"
+            >
+              Request
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--------------------------Requests Mobile Modal  ---------------------->
+
+    <!--------------------------Transfer Mobile Modal  ---------------------->
+
+    <div
+      class="modal fade"
+      id="LtransModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <i class="fa fa-history" aria-hidden="true"></i> Latest
+              Transactions ({{ LTrans.length }})
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              class="shadow bg-primary text-white p-2 rounded mx-2 L-trans"
+              style="width: 400px"
+            >
+              <span
+                style="cursor: pointer; margin-left: 100px"
+                class="border rounded"
+                data-bs-toggle="modal"
+                data-bs-target="#transferDetailsModal"
+                >View all <i class="fa fa-arrow-right" aria-hidden="true"></i
+              ></span>
+              <div *ngFor="let trans of LTrans; let i = index" class="mt-2">
+                <div class="row" *ngIf="i < 5">
+                  <div class="col-4">{{ i + 1 }} - {{ trans.type }}</div>
+                  <div class="col-4">
+                    <small>{{ trans.time | timeago }}</small>
+                  </div>
+                  <div
+                    class="col-4"
+                    [style]="
+                      trans.type === 'Debit'
+                        ? { color: 'red' }
+                        : { color: 'green' }
+                    "
+                  >
+                    <span class="bg-white p-1 rounded shadow text-center">
+                      <span *ngIf="trans.type === 'Debit'">-</span
+                      ><span *ngIf="trans.type === 'Credit'">+</span>
+                      {{ trans.amt | currency: "NGN":"symbol-narrow" }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--------------------------Transfer Mobile Modal  ---------------------->
+  </div>
+
+
+</body>
+</html>

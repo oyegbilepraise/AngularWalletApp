@@ -1,0 +1,242 @@
+body{
+  overflow: hidden !important;
+}
+.bg_height{
+  height: 600px !important;
+}
+.body {
+  font-family: cursive;
+  height: 900px !important;
+  overflow: hidden !important;
+}
+.current_balance {
+  color: white;
+  font-size: larger;
+  background: linear-gradient(to right, #fd7498, #fc9d39);
+  width: 160px;
+}
+
+.transfer_scroll {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+/* ::-webkit-scrollbar {
+  height: 5px;
+  background-color: grey;
+} */
+.quick_transfer input {
+  border-color: blue !important;
+}
+.wallet {
+  overflow-x: scroll;
+}
+.loan input {
+  border-color: black !important ;
+}
+.logout {
+  background: linear-gradient(to right, #fd7498, #fc9d39);
+}
+#red {
+  background: linear-gradient(to right, #fd7498, #fc9d39);
+}
+button {
+  background: linear-gradient(to right, #fd7498, #fc9d39) !important;
+  border: 0 !important;
+  outline: none !important ;
+  cursor: pointer;
+  color: #fff !important;
+}
+.L-trans {
+  background: linear-gradient(to right, #fd7498, #fc9d39) !important;
+}
+
+.transfer_img {
+  background-image: url(../../assets/img/avatar.png);
+  /* height: 50px; */
+  /* width: 50px; */
+  background-size: cover;
+}
+.navbar{
+  display: block ;
+}
+
+@media (max-width: 770px) {
+  body {
+    overflow: scroll !important;
+  }
+  .logout{
+    margin-left: 330px;
+  }
+  .navbar {
+    position: absolute;
+    display: none;
+    z-index: 10;
+    background-color: blue;
+    width: 200px !important;
+    color: black!important;
+    margin-top: 30px !important;
+    margin-left: 15px!important;
+    /* margin-left: -300px !important; */
+  }
+  .mobile_data {
+    text-align: start;
+    padding-top: 5px !important;
+    font-size: 20px !important;
+    margin-bottom: -20px !important;
+    margin-right: 20px !important;
+    margin-left: 10px !important;
+  }
+  .phone-dash {
+    display: block !important;
+    background-size: cover;
+    background-image: url(../../assets/img/CS.png);
+    background-color: blue;
+    height: 800px;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    /* overflow-y: scroll !important ; */
+  }
+  .bg_height {
+    max-width: 700px !important;
+    /* margin-left: 10px !important; */
+    margin-right: 0px !important;
+    margin: 0 !important;
+    height: 870px !important;
+    /* margin-bottom: 40px !important; */
+  }
+  .overview_fa {
+    margin-left: 10px !important;
+  }
+  .quick {
+    width: 350px !important;
+    margin-left: 70px !important;
+    margin-bottom: 20px !important;
+    height: 270px;
+  }
+  .request {
+    width: 350px !important;
+    margin-left: 70px !important;
+    margin-bottom: 20px !important;
+  }
+  .wallet {
+    width: 350px !important;
+    margin-left: 15px !important;
+  }
+  .wallet-col {
+    width: 460px !important;
+    margin-bottom: 20px !important;
+    height: 200px !important;
+    /* margin-left: 20px !important; */
+  }
+  .L-trans {
+    width: 390px !important;
+    margin-left: 50px !important;
+    margin-bottom: 20px !important;
+    height: 200px !important;
+  }
+  .current_balance {
+    border-radius: 10px !important;
+    color: blue;
+    align-items: center;
+    font-size: larger;
+    background: #fff;
+    width: 500px;
+    margin-left: 30px;
+    height: 200px;
+    /* margin-top: 50px !important; */
+  }
+  .pp {
+    text-align: end;
+    padding-top: 20px !important;
+    font-size: 30px !important;
+    margin-bottom: -20px !important;
+    padding-left: 10px !important;
+  }
+  .ppp {
+    margin-top: -10px !important;
+  }
+  .card_p {
+    max-width: 100px;
+  }
+  .mobile_wallet {
+    width: 400px !important;
+    margin-left: 50px !important;
+    margin-top: 30px !important;
+  }
+  .dnone{
+    display: none !important;
+  }
+  .phone_nav{
+    color: white !important;
+  }
+}
+@media (max-width: 360px) {
+  .body {
+    overflow-y: scroll !important;
+    height: 700px !important;
+    background-color: white !important;
+  }
+  .bg_height{
+    margin-bottom: -50px !important;
+  }
+  .card-row {
+    margin: 0 !important;
+    margin-top: 20px !important;
+  }
+  .acctNo {
+    font-size: 20px !important;
+  }
+  .current_balance {
+    width: 250px !important;
+  }
+  .mobile_wallet {
+    width: 250px !important;
+    margin-top: 30px !important;
+    overflow-x: scroll !important;
+    margin-left: 15px !important;
+  }
+  .wallet {
+    min-width: 300px !important;
+    /* overflow: hidden !important; */
+  }
+  .phone-dash {
+    height: 770px;
+  }
+  .wallet::-webkit-scrollbar {
+    height: 2px !important;
+    background-color: white !important;
+  }
+  .L-trans {
+    width: 330px !important;
+    margin-left: -10px !important;
+  }
+  .phone-dash {
+    height: 820px;
+  }
+  .mobile_data {
+    display: none !important;
+  }
+  .dnone{
+    display: none !important;
+  }
+  .current_balance{
+    margin-left: 15px !important;
+  }
+  .phone_nav{
+    color: white !important;
+  }
+  .navbar {
+    position: absolute;
+    display: none;
+    z-index: 10;
+    background-color: blue;
+    width: 200px !important;
+    color: black!important;
+    margin-top: 30px !important;
+    margin-left: 15px!important;
+    /* margin-left: -300px !important; */
+  }
+  .logout{
+    margin-left: 80px;
+  }
+}

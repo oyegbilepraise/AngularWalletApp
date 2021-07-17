@@ -1,0 +1,120 @@
+<div class="container bg-white  cont">
+    <div class="mx-2 shadow p-2 d-flex d-none d-md-block">
+        <nav aria-label="breadcrumb" class="d-flex">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-primary" (click)='back()'>Dashboard</a></li>
+            <li
+              class="breadcrumb-item active text-dark"
+              aria-current="page"
+            >
+              <a>Profile</a> 
+            </li>
+          </ol>
+          <div class="overview_fa" style="margin-left: 500px">
+            <i class="fa fa-envelope mx-2" aria-hidden="true"></i>
+            <i class="fa fa-bell mx-2" aria-hidden="true"></i>
+            <i class="fa fa-calculator mx-2" aria-hidden="true"></i>
+          </div>
+        </nav>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12 col-md-6 mt-3">
+          <div class="card p-3 shadow">
+            <div class="d-flex d">
+              <div>
+                <small>Main Account</small>
+                <p class="mt-2">yaFavBank Savings Account</p>
+                <p>Account No: {{user.acctNo}}</p>
+              </div>
+              <div class="text-end" style="margin-left: 70px;">
+                <small>Available funds</small>
+                <p class="mt-2">
+                   {{user.acctBal | currency:'NGN':'symbol-narrow'}}
+                </p>
+              </div>
+            </div>
+            <div class="d-flex d-none d-md-block">
+              <button class="btn btn-white text-primary shadow">Lorem Ipsum</button>
+              <button class="btn btn-primary text-white mx-4 shadow">Lorem Ipsum</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mt-3">
+          <div class="card bg-primary p-3">
+            <h1 class="text-center"><i class="fa fa-calendar" aria-hidden="true"></i></h1>
+            <h1>Calendar Here !</h1>
+            <p>Lorem myCalendar</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="text-center mt-3">Profile Details...</h3>
+      <div class="d-flex shadow dis p-2">
+        <div>
+          <img src="/assets/img/avatar.png" class="w-75 rounded-circle" alt="">
+        </div>
+        <div>
+          <div class="row">
+            <div class="col-12 col-md-4 text-center">
+              <label>Firstname: </label>
+              <p>{{user.firstname}}</p>
+            </div>
+            <div class="col-12 col-md-4 text-center">
+              <label>Lastname: </label>
+              <p>{{user.lastname}}</p>
+            </div>
+            <div class="col-12 col-md-4 text-center">
+              <label>Email: </label>
+              <p>{{user.mail}}</p>
+            </div>
+            <div class="col-12 col-md-4 text-center">
+              <label>Date of Birth: </label>
+              <p>{{user.dob}}</p>
+            </div>
+            
+            <div class="col-12 col-md-4 text-center">
+              <label>Phone No: </label>
+              <p>{{user.phoneNo}}</p>
+            </div>
+            <div class="col-12 col-md-4 text-center">
+              <label>Lorem: </label>
+              <p>Lorem Ipsum dolor</p>
+            </div>
+            <div class="col-12 col text-center">
+              <label>Contact Address: </label>
+              <p>Lorem ipsum dolor sit amet consectetur 
+              </p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary text-white">Edit Profile</button>
+      </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>

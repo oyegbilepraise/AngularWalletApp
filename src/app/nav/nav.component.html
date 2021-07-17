@@ -1,0 +1,66 @@
+<div class="animate__animated animate__fadeInDown animate_slower">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 shadow fixed">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">yaFavBank</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              href="#home"
+              class="nav-link"
+              aria-current="page"
+              routerLink="/home"
+              routerLinkActive="active"
+              ><i class="fa fa-home" aria-hidden="true"></i> Home</a
+            >
+          </li>
+
+          <li class="nav-item text-end">
+            <a
+              href="#about"
+              class="nav-link text-end"
+              routerLinkActive="active"
+              tabindex="-1"
+              aria-disabled="true"
+              >About</a
+            >
+          </li>
+        </ul>
+        <form class="d-flex">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active"
+            ><i
+              class="fa fa-sign-in"
+              aria-hidden="true"
+              style="color: blue"
+            ></i>
+            Login</a
+          >
+          <a
+            class="nav-link"
+            routerLink="/register"
+            routerLinkActive="active"
+            tabindex="-1"
+            aria-disabled="true"
+            ><i
+              class="fa fa-sign-out"
+              aria-hidden="true"
+              style="color: blue"
+            ></i>
+            SignUp</a
+          >
+        </form>
+      </div>
+    </div>
+  </nav>
+</div>
