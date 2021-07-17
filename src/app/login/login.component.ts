@@ -48,11 +48,10 @@ export class LoginComponent implements OnInit {
           `!`,
           'success'
         )
-
         this.router.navigate([`/dashboard/${myData.id}`])
       }
       else {
-        this.alert = 'Bro you ain"t register| Kindly visit d registration page'
+        // alert('Bro you ain"t register| Kindly visit d registration page')
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
