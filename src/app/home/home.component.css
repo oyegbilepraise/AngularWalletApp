@@ -56,9 +56,10 @@ footer {
 @media (max-width: 760px) {
   .home_details_img {
     margin-top: 20px !important;
+    height: 300px !important;
   }
   .cont{
-    height: 90vh !important;
+    height: 95vh !important;
   }
   .features .card {
     width: 15rem !important;
@@ -74,7 +75,7 @@ footer {
     font-size: 2em;
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 550px) {
   .welcome_text {
     line-height: normal !important;
   }

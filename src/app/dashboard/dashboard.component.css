@@ -170,7 +170,7 @@ button {
     color: white !important;
   }
 }
-@media (max-width: 360px) {
+@media (max-width: 460px) {
   .body {
     overflow-y: scroll !important;
     height: 700px !important;
